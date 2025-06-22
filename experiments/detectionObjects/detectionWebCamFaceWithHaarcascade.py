@@ -1,7 +1,7 @@
 import cv2
 
 webCamImage = cv2.VideoCapture(0)
-detector = cv2.CascadeClassifier('./algorithms/haarcascade_frontalface_default.xml')
+detector = cv2.CascadeClassifier('algorithms/haarcascade_frontalface_default.xml')
 
 while True:
     ret, frame = webCamImage.read()
