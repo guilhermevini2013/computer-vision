@@ -1,6 +1,7 @@
 import cv2
 
-tracking = cv2.TrackerKCF.create()
+#tracking = cv2.TrackerKCF.create()
+tracking = cv2.TrackerCSRT.create()
 
 video_futebol = cv2.VideoCapture("./video/futebol (online-video-cutter.com).mp4")
 ok, frame = video_futebol.read()
