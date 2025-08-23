@@ -5,8 +5,9 @@ import os
 import seaborn as sns
 import matplotlib.pyplot as plt
 import sklearn
+from sklearn.metrics import classification_report
 
-images_url = os.listdir("./homer_bart")
+images_url = os.listdir("")
 images = []
 classes = []
 high = 128
@@ -54,12 +55,12 @@ def create_network_and_train():
 """
     You must to remover this line, case you dont want train network
 """
-create_network_and_train()
+#create_network_and_train()
 
 model = tf.keras.models.load_model("bart_homer.h5")
 
 result = model.predict(x_test)
-for i,test in enumerate(y_test):
-    print(test, result[i]>0.5)
+y_pred = (result > 0.5).astype("int32")
+print(classification_report(y_test, y_pred, target_names=["Bart", "Homer"]))
 
 
