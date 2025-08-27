@@ -2,12 +2,10 @@ import numpy as np
 import tensorflow as tf
 import cv2
 import os
-import seaborn as sns
-import matplotlib.pyplot as plt
 import sklearn
 from sklearn.metrics import classification_report
 
-images_url = os.listdir("")
+images_url = os.listdir("./images")
 images = []
 classes = []
 high = 128
@@ -15,7 +13,7 @@ width = 128
 
 def insert_images_classes():
     for image_url in images_url:
-        image = cv2.imread(f"./homer_bart/{image_url}")
+        image = cv2.imread(f"./images/{image_url}")
 
         image = cv2.resize(image, (width, high))
         image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
