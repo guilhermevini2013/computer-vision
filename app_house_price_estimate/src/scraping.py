@@ -17,13 +17,14 @@ class Scraping:
         response = rq.get(url=f"{self.url_neighborhood}")
         json_response = response.json()
         self.list_neighborhood_find = [item["url"] for item in json_response["data"].get("items", [])]
+        return self.list_neighborhood_find
 
 
     def get_information(self):
         houses = []
         self.get_neighborhood()
         for neighborhood_url in self.list_neighborhood_find:
-            for i in range(1, 4):
+            for i in range(1, 5):
                 try:
                     response_scraping = rq.get(url=f"{self.url_scraping}{neighborhood_url}/?pg={i}")
                     soup = BeautifulSoup(response_scraping.text, "html.parser")

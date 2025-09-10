@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import sklearn.model_selection
 import tensorflow as tf
 from keras.src.callbacks import EarlyStopping
 from sklearn.preprocessing import MinMaxScaler
@@ -12,20 +13,20 @@ class Network:
         self.scaler_X = scaler_X
         self.scaler_y = scaler_y
 
-    def create_train_network(self, X, y):
-        num_total_params = len(X[0])
+    def create_train_network(self, X_train, X_test, y_train, y_test):
+
+        num_total_params = len(X_train[0])
         model = tf.keras.Sequential()
-        model.add(tf.keras.layers.Input(shape=(X.shape[1],)))
-        model.add(tf.keras.layers.Dense(units=int(num_total_params / 2), activation="relu"))
-        model.add(tf.keras.layers.Dense(units=int(num_total_params / 4), activation="relu"))
-        model.add(tf.keras.layers.Dense(units=int(num_total_params / 6), activation="relu"))
-        model.add(tf.keras.layers.Dense(units=int(num_total_params / 8), activation="relu"))
+        model.add(tf.keras.layers.Input(shape=(X_train.shape[1],)))
+        model.add(tf.keras.layers.Dense(units=int(num_total_params / 2)+1, activation="relu"))
+        model.add(tf.keras.layers.Dense(units=int(num_total_params / 4)+1, activation="relu"))
+        model.add(tf.keras.layers.Dense(units=int(num_total_params / 6)+1, activation="relu"))
+        model.add(tf.keras.layers.Dense(units=int(num_total_params / 8)+1, activation="relu"))
         model.add(tf.keras.layers.Dense(units=1, activation=None))
 
         model.compile(optimizer='adam', loss='mse', metrics=['mae'])
 
-        early_stopping = EarlyStopping(monitor='val_loss', patience=15, restore_best_weights=True)
-        history =model.fit(X, y, epochs=50, batch_size=32, validation_split=0.3, callbacks=[early_stopping])
+        history =model.fit(X_train, y_train, epochs=150, batch_size=64, validation_data=(X_test,y_test))
         mae_normalized = history.history['val_mae'][-1]
 
         mae_reais = np.expm1(self.scaler_y.inverse_transform([[mae_normalized]])[0][0])
@@ -52,8 +53,8 @@ class Network:
 
         if result is not None:
             result_in_reais = self.revert_normalization_to_reais(result[0][0], scaler_y)
-
-        return f"{result_in_reais:,.2f}"
+        formatted_result = f"R${result_in_reais:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
+        return formatted_result
 
     def revert_normalization_to_reais(self, normalized_value, scaler_y):
         price_real = np.expm1(scaler_y.inverse_transform([[normalized_value]])[0][0])

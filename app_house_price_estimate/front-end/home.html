@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="header">
+    <div class="name">
+        <img src="img/casa.png" alt="casa">
+        <p> Real Estate Price Estimation</p>
+    </div>
+    <div class="indice">
+        <p>Home</p>
+        <p>About</p>
+        <p>Contact</p>
+    </div>
+</div>
+
+<article>
+    <div class="title">
+        <h1 style="font-size: 67px; font-weight: 500;"><b>Estimate your home value</b></h1>
+        <p style="font-size: 30px;">Enter details about your property below to get an estimate of its value </p>
+    </div>
+    <div class="entrance">
+        <div class="field">
+            <label for="area">Area m²</label>
+            <input id="area" type="number" placeholder="Area m²">
+        </div>
+        <div class="field">
+            <label for="parking">Number of parking spaces</label>
+            <input id="parking" type="number" placeholder="Number of parking spaces">
+        </div>
+    </div>
+
+    <div class="entrance2">
+        <div class="field">
+            <label for="bedrooms">Bedrooms</label>
+            <input id="bedrooms" type="number" placeholder="Bedrooms">
+        </div>
+        <div class="field">
+            <label for="bathrooms">Bathrooms</label>
+            <input id="bathrooms" type="number" placeholder="Bathrooms">
+        </div>
+    </div>
+
+    <div class="entrance2">
+        <div class="field">
+            <label for="neighborhoods">Neighborhood</label>
+            <select id="neighborhoods">
+                <option value="">Select a neighborhood</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="button">
+        <button id="send">Estimate</button>
+    </div>
+    <div id="result" class="result"></div>
+</article>
+
+<div class="note">
+    <p>Note: This estimator provides an estimate of your home's value based on comparable</p>
+    <p>properties in your area</p>
+</div>
+</body>
+<script src="./js/home.js"></script>
+
+</html>
