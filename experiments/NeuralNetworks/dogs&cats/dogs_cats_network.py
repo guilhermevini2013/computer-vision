@@ -57,7 +57,7 @@ def create_train_network(pixels_train, pixels_test, classes_train, classes_test)
     network1.fit(
         x=pixels_train,
         y=classes_train,
-        epochs=50,
+        epochs=120,
         batch_size=64,
         validation_data=(pixels_test, classes_test)
     )
