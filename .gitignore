@@ -1,0 +1,3 @@
+/app_smart_emails/src/modelAI/mailscnn.h5
+/app_smart_emails/src/modelAI/tokenizer.pkl
+/experiments/CNN/cnn/dogs_cats.h5
