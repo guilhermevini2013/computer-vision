@@ -9,7 +9,7 @@ SEQ_LEN = 25
 NUM_CLASSES = 7  # ajusta se necessário
 
 # ---------- CARREGAR MODELO ----------
-model = tf.keras.models.load_model("best_foldV4_3.keras", compile=False)
+model = tf.keras.models.load_model("best_foldV4_0_noaugment.keras", compile=False)
 
 # ---------- MEDIAPIPE ----------
 mp_holistic = mp.solutions.holistic
@@ -49,6 +49,19 @@ labels_map = {
     4: "Aproveitar",
     5: "Bala",
     6: "Banco",
+    7: "Banheiro",
+    8: "Barulho",
+    9: "Cinco",
+    10: "Conhecer",
+    11: "Espelho",
+    12: "Esquina",
+    13: "Filho",
+    14: "Maça",
+    15:"Medo",
+    16:"Ruim",
+    17:"Sapo",
+    18:"Vacina",
+    19:"Vontade",
 }
 
 # ---------- WEBCAM ----------

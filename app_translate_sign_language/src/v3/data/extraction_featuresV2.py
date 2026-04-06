@@ -205,11 +205,12 @@ for file in dirs:
         X.append(data_original)
         y.append(label)
 
-        """
-        data_augment = augment(data_original)
-        X.append(data_augment)
-        y.append(label)
-        """
+
+        for i in range(0,2):
+            data_augment = augment(data_original)
+            X.append(data_augment)
+            y.append(label)
+
 
 
     except Exception as e:
@@ -221,5 +222,5 @@ y = np.array(y)
 print("Final X shape:", X.shape)
 print("Final y shape:", y.shape)
 
-np.savez_compressed("../model/datasetv5_noaugment.npz", X=X, y=y)
+np.savez_compressed("../model/datasetv7_augment.npz", X=X, y=y)
 print("Dataset salvo com sucesso!")

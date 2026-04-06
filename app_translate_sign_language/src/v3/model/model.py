@@ -7,7 +7,7 @@ from sklearn.model_selection import StratifiedKFold
 NUM_CLASSES = 7
 SEQ_LEN = 25
 BATCH = 16
-EPOCHS = 60
+EPOCHS = 120
 SEED = 46
 
 tf.random.set_seed(SEED)
@@ -18,6 +18,7 @@ data = np.load("datasetv5_noaugment.npz")
 
 X = data["X"]  # esperado: (N, 25, 75, 3)
 y = data["y"]  # pode ser (N,) ou (N,7)
+print(y)
 y = y - 1
 print("Shape X:", X.shape)
 print("Shape y:", y.shape)
@@ -55,8 +56,8 @@ def build_model():
     x = layers.LayerNormalization()(x)
 
     # GRU stack
-    x = layers.GRU(128, return_sequences=True, dropout=0.3)(x)
-    x = layers.GRU(64, dropout=0.3)(x)
+    x = layers.GRU(64, return_sequences=True, dropout=0.3)(x)
+    x = layers.GRU(32, dropout=0.3)(x)
 
     # head
     x = layers.Dense(64, activation='relu')(x)
@@ -93,7 +94,7 @@ for fold, (tr_idx, val_idx) in enumerate(skf.split(X, y_labels)):
         callbacks.EarlyStopping(patience=6, restore_best_weights=True),
         callbacks.ReduceLROnPlateau(patience=3, factor=0.4, min_lr=1e-5),
         callbacks.ModelCheckpoint(
-            filepath=f'best_foldV4_{fold}_noaugment.keras',  # formato nativo Keras
+            filepath=f'best_foldV6_{fold}_augment20_gru.keras',  # formato nativo Keras
             save_best_only=True,
             verbose=1
         )
